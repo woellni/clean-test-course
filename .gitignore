@@ -23,3 +23,7 @@ env.bak/
 venv.bak/ 
 
 test*.sh
+
+# Python code coverage data
+.coverage
+.coverage.*
