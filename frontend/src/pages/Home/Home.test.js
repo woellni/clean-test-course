@@ -4,6 +4,11 @@ import axios from 'axios';
 import Home from '.';
 
 describe('Test Home', () => {
+  // Exercise: Restore mocks after each test
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   test('Test Render', async () => {
     //Arrange: Setup the mock API
     //Listen for any GET requests using the axios module
@@ -45,6 +50,18 @@ describe('Test Home', () => {
     //There should be 2 categories as defined in the mock response above
     expect(await screen.findAllByTestId(/category-item/i)).toHaveLength(2);
     //The word Appeateasers should be in there as defined in the mock response above.
+    expect(await screen.findByText('Appeteasers')).toBeInTheDocument();
+  });
+
+  // Exercise: Add integration test (Real Backend API)
+    test('Test Render - Integration Test', async () => {
+    //Arrange: 
+    //No mock! The actual API will be called.
+    //Act: Render the Home page
+    render(<Home />);
+
+    // Assert: Verify the categories from the real API
+    expect(await screen.findAllByTestId(/category-item/i)).toHaveLength(2);
     expect(await screen.findByText('Appeteasers')).toBeInTheDocument();
   });
 });
